@@ -582,6 +582,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
 
             boolean wasActive = isActive();
             try {
+                // jdk底层的bind
                 doBind(localAddress);
             } catch (Throwable t) {
                 safeSetFailure(promise, t);

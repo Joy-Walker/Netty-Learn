@@ -481,6 +481,7 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap
         }
 
         final AbstractChannelHandlerContext next = findContextOutbound();
+        // 选择一个NioEventLoop线程
         EventExecutor executor = next.executor();
         if (executor.inEventLoop()) {
             // 执行bind

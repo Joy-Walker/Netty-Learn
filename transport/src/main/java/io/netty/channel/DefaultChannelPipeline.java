@@ -1381,6 +1381,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
             // NOOP
         }
 
+        // 调用HeadContext的bind
         @Override
         public void bind(
                 ChannelHandlerContext ctx, SocketAddress localAddress, ChannelPromise promise)
