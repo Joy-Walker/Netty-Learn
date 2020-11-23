@@ -24,7 +24,7 @@ import io.netty.util.internal.UnstableApi;
  *
  * <p>The last stream identifier <em>must not</em> be set by the application, but instead the
  * relative {@link #extraStreamIds()} should be used. The {@link #lastStreamId()} will only be
- * set for incoming GOAWAY frames by the HTTP/2 codec.
+ * set for incoming GOAWAY frames by the HTTP/2 damo.
  *
  * <p>Graceful shutdown as described in the HTTP/2 spec can be accomplished by calling
  * {@code #setExtraStreamIds(Integer.MAX_VALUE)}.

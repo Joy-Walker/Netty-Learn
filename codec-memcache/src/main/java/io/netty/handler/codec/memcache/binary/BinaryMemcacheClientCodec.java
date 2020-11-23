@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * The client codec that combines the proper encoder and decoder.
+ * The client damo that combines the proper encoder and decoder.
  * <p/>
- * Use this codec if you want to implement a memcache client that speaks the binary protocol. It
+ * Use this damo if you want to implement a memcache client that speaks the binary protocol. It
  * combines both the {@link BinaryMemcacheResponseDecoder} and the {@link BinaryMemcacheRequestEncoder}.
  * <p/>
  * Optionally, it counts the number of outstanding responses and raises an exception if - on connection

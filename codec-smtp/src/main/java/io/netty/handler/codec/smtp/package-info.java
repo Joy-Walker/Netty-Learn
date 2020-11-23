@@ -15,7 +15,7 @@
  */
 
 /**
- * <a href="https://www.ietf.org/rfc/rfc2821.txt">SMTP</a> codec.
+ * <a href="https://www.ietf.org/rfc/rfc2821.txt">SMTP</a> damo.
  */
 @UnstableApi
 package io.netty.handler.codec.smtp;

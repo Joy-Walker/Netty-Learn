@@ -204,8 +204,8 @@ public final class HttpConversionUtil {
      * @param http2Headers The initial set of HTTP/2 headers to create the response with
      * @param alloc The {@link ByteBufAllocator} to use to generate the content of the message
      * @param validateHttpHeaders <ul>
-     *        <li>{@code true} to validate HTTP headers in the http-codec</li>
-     *        <li>{@code false} not to validate HTTP headers in the http-codec</li>
+     *        <li>{@code true} to validate HTTP headers in the http-damo</li>
+     *        <li>{@code false} not to validate HTTP headers in the http-damo</li>
      *        </ul>
      * @return A new response object which represents headers/data
      * @throws Http2Exception see {@link #addHttp2ToHttpHeaders(int, Http2Headers, FullHttpMessage, boolean)}
@@ -237,8 +237,8 @@ public final class HttpConversionUtil {
      * @param http2Headers The initial set of HTTP/2 headers to create the request with
      * @param alloc The {@link ByteBufAllocator} to use to generate the content of the message
      * @param validateHttpHeaders <ul>
-     *        <li>{@code true} to validate HTTP headers in the http-codec</li>
-     *        <li>{@code false} not to validate HTTP headers in the http-codec</li>
+     *        <li>{@code true} to validate HTTP headers in the http-damo</li>
+     *        <li>{@code false} not to validate HTTP headers in the http-damo</li>
      *        </ul>
      * @return A new request object which represents headers/data
      * @throws Http2Exception see {@link #addHttp2ToHttpHeaders(int, Http2Headers, FullHttpMessage, boolean)}
@@ -271,8 +271,8 @@ public final class HttpConversionUtil {
      * @param streamId The stream associated with the request
      * @param http2Headers The initial set of HTTP/2 headers to create the request with
      * @param validateHttpHeaders <ul>
-     *        <li>{@code true} to validate HTTP headers in the http-codec</li>
-     *        <li>{@code false} not to validate HTTP headers in the http-codec</li>
+     *        <li>{@code true} to validate HTTP headers in the http-damo</li>
+     *        <li>{@code false} not to validate HTTP headers in the http-damo</li>
      *        </ul>
      * @return A new request object which represents headers for a chunked request
      * @throws Http2Exception see {@link #addHttp2ToHttpHeaders(int, Http2Headers, FullHttpMessage, boolean)}
@@ -302,8 +302,8 @@ public final class HttpConversionUtil {
      * @param streamId The stream associated with the response
      * @param http2Headers The initial set of HTTP/2 headers to create the response with
      * @param validateHttpHeaders <ul>
-     *        <li>{@code true} to validate HTTP headers in the http-codec</li>
-     *        <li>{@code false} not to validate HTTP headers in the http-codec</li>
+     *        <li>{@code true} to validate HTTP headers in the http-damo</li>
+     *        <li>{@code false} not to validate HTTP headers in the http-damo</li>
      *        </ul>
      * @return A new response object which represents headers for a chunked response
      * @throws Http2Exception see {@link #addHttp2ToHttpHeaders(int, Http2Headers,

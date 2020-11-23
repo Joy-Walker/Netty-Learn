@@ -24,7 +24,7 @@ public class SnappyIntegrationTest extends AbstractIntegrationTest {
 
     /**
      * The number of random regression tests run by testRandom() runs.  Whenever testRandom() finds the case that
-     * the snappy codec can't encode/decode, it will print the generated source code of the offending test case.
+     * the snappy damo can't encode/decode, it will print the generated source code of the offending test case.
      * You can always reproduce the problem using it rather than relying on testRandom().
      *
      * The default is 1, but you can increase it to increase the chance of finding any unusual cases.

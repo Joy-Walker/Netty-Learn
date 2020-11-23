@@ -422,7 +422,7 @@ public class HttpPostRequestEncoderTest {
         // 16 bytes as HttpPostRequestEncoder uses Long.toHexString(...) to generate a hex-string which will be between
         // 2 and 16 bytes.
         // See https://github.com/netty/netty/blob/4.1/codec-http/src/main/java/io/netty/handler/
-        // codec/http/multipart/HttpPostRequestEncoder.java#L291
+        // damo/http/multipart/HttpPostRequestEncoder.java#L291
         int expectedSizeMin = sizeWithoutDelimiter + 2;
         int expectedSizeMax = sizeWithoutDelimiter + 16;
 

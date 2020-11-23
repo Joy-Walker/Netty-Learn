@@ -40,17 +40,17 @@ import static io.netty.util.internal.ObjectUtil.checkNotNull;
 public class HttpServerUpgradeHandler extends HttpObjectAggregator {
 
     /**
-     * The source codec that is used in the pipeline initially.
+     * The source damo that is used in the pipeline initially.
      */
     public interface SourceCodec {
         /**
-         * Removes this codec (i.e. all associated handlers) from the pipeline.
+         * Removes this damo (i.e. all associated handlers) from the pipeline.
          */
         void upgradeFrom(ChannelHandlerContext ctx);
     }
 
     /**
-     * A codec that the source can be upgraded to.
+     * A damo that the source can be upgraded to.
      */
     public interface UpgradeCodec {
         /**
@@ -71,7 +71,7 @@ public class HttpServerUpgradeHandler extends HttpObjectAggregator {
                                     HttpHeaders upgradeHeaders);
 
         /**
-         * Performs an HTTP protocol upgrade from the source codec. This method is responsible for
+         * Performs an HTTP protocol upgrade from the source damo. This method is responsible for
          * adding all handlers required for the new protocol.
          *
          * @param ctx the context for the current handler.
@@ -181,8 +181,8 @@ public class HttpServerUpgradeHandler extends HttpObjectAggregator {
      * length of the content of an upgrade request.
      * </p>
      *
-     * @param sourceCodec the codec that is being used initially
-     * @param upgradeCodecFactory the factory that creates a new upgrade codec
+     * @param sourceCodec the damo that is being used initially
+     * @param upgradeCodecFactory the factory that creates a new upgrade damo
      *                            for one of the requested upgrade protocols
      */
     public HttpServerUpgradeHandler(SourceCodec sourceCodec, UpgradeCodecFactory upgradeCodecFactory) {
@@ -192,8 +192,8 @@ public class HttpServerUpgradeHandler extends HttpObjectAggregator {
     /**
      * Constructs the upgrader with the supported codecs.
      *
-     * @param sourceCodec the codec that is being used initially
-     * @param upgradeCodecFactory the factory that creates a new upgrade codec
+     * @param sourceCodec the damo that is being used initially
+     * @param upgradeCodecFactory the factory that creates a new upgrade damo
      *                            for one of the requested upgrade protocols
      * @param maxContentLength the maximum length of the content of an upgrade request
      */
@@ -305,7 +305,7 @@ public class HttpServerUpgradeHandler extends HttpObjectAggregator {
         }
 
         // Prepare and send the upgrade response. Wait for this write to complete before upgrading,
-        // since we need the old codec in-place to properly encode the response.
+        // since we need the old damo in-place to properly encode the response.
         final FullHttpResponse upgradeResponse = createUpgradeResponse(upgradeProtocol);
         if (!upgradeCodec.prepareUpgradeResponse(ctx, request, upgradeResponse.headers())) {
             return false;

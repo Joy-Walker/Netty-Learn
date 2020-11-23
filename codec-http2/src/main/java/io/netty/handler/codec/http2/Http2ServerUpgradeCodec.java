@@ -41,7 +41,7 @@ import static io.netty.handler.codec.http2.Http2FrameTypes.SETTINGS;
 import static io.netty.util.internal.ObjectUtil.checkNotNull;
 
 /**
- * Server-side codec for performing a cleartext upgrade from HTTP/1.x to HTTP/2.
+ * Server-side damo for performing a cleartext upgrade from HTTP/1.x to HTTP/2.
  */
 @UnstableApi
 public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.UpgradeCodec {
@@ -59,7 +59,7 @@ public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.Upgrade
     private Http2Settings settings;
 
     /**
-     * Creates the codec using a default name for the connection handler when adding to the
+     * Creates the damo using a default name for the connection handler when adding to the
      * pipeline.
      *
      * @param connectionHandler the HTTP/2 connection handler
@@ -69,7 +69,7 @@ public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the codec using a default name for the connection handler when adding to the
+     * Creates the damo using a default name for the connection handler when adding to the
      * pipeline.
      *
      * @param http2Codec the HTTP/2 multiplexing handler.
@@ -79,7 +79,7 @@ public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the codec providing an upgrade to the given handler for HTTP/2.
+     * Creates the damo providing an upgrade to the given handler for HTTP/2.
      *
      * @param handlerName the name of the HTTP/2 connection handler to be used in the pipeline,
      *                    or {@code null} to auto-generate the name
@@ -90,7 +90,7 @@ public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the codec providing an upgrade to the given handler for HTTP/2.
+     * Creates the damo providing an upgrade to the given handler for HTTP/2.
      *
      * @param handlerName the name of the HTTP/2 connection handler to be used in the pipeline.
      * @param http2Codec the HTTP/2 multiplexing handler.
@@ -100,7 +100,7 @@ public class Http2ServerUpgradeCodec implements HttpServerUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the codec using a default name for the connection handler when adding to the
+     * Creates the damo using a default name for the connection handler when adding to the
      * pipeline.
      *
      * @param http2Codec the HTTP/2 frame handler.

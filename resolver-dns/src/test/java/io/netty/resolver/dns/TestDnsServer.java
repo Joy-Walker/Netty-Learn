@@ -92,9 +92,9 @@ class TestDnsServer extends DnsServer {
         acceptor.setHandler(new DnsProtocolHandler(this, store) {
             @Override
             public void sessionCreated(IoSession session) throws Exception {
-                // USe our own codec to support AAAA testing
+                // USe our own damo to support AAAA testing
                 session.getFilterChain()
-                    .addFirst("codec", new ProtocolCodecFilter(new TestDnsProtocolUdpCodecFactory()));
+                    .addFirst("damo", new ProtocolCodecFilter(new TestDnsProtocolUdpCodecFactory()));
             }
         });
 

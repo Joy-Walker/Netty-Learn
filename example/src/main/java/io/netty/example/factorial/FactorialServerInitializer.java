@@ -45,7 +45,7 @@ public class FactorialServerInitializer extends ChannelInitializer<SocketChannel
         pipeline.addLast(ZlibCodecFactory.newZlibEncoder(ZlibWrapper.GZIP));
         pipeline.addLast(ZlibCodecFactory.newZlibDecoder(ZlibWrapper.GZIP));
 
-        // Add the number codec first,
+        // Add the number damo first,
         pipeline.addLast(new BigIntegerDecoder());
         pipeline.addLast(new NumberEncoder());
 

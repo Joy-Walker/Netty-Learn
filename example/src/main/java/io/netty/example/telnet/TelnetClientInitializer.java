@@ -48,7 +48,7 @@ public class TelnetClientInitializer extends ChannelInitializer<SocketChannel> {
             pipeline.addLast(sslCtx.newHandler(ch.alloc(), TelnetClient.HOST, TelnetClient.PORT));
         }
 
-        // Add the text line codec combination first,
+        // Add the text line damo combination first,
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
         pipeline.addLast(DECODER);
         pipeline.addLast(ENCODER);

@@ -20,7 +20,7 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.internal.ObjectUtil;
 
 /**
- * Mqtt version specific constant values used by multiple classes in mqtt-codec.
+ * Mqtt version specific constant values used by multiple classes in mqtt-damo.
  */
 public enum MqttVersion {
     MQTT_3_1("MQIsdp", (byte) 3),

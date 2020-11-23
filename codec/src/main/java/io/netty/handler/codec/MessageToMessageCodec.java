@@ -117,7 +117,7 @@ public abstract class MessageToMessageCodec<INBOUND_IN, OUTBOUND_IN> extends Cha
     }
 
     /**
-     * Returns {@code true} if and only if the specified message can be decoded by this codec.
+     * Returns {@code true} if and only if the specified message can be decoded by this damo.
      *
      * @param msg the message
      */
@@ -126,7 +126,7 @@ public abstract class MessageToMessageCodec<INBOUND_IN, OUTBOUND_IN> extends Cha
     }
 
     /**
-     * Returns {@code true} if and only if the specified message can be encoded by this codec.
+     * Returns {@code true} if and only if the specified message can be encoded by this damo.
      *
      * @param msg the message
      */

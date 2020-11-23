@@ -153,7 +153,7 @@ public abstract class ProxyHandler extends ChannelDuplexHandler {
     }
 
     /**
-     * Adds the codec handlers required to communicate with the proxy server.
+     * Adds the damo handlers required to communicate with the proxy server.
      */
     protected abstract void addCodec(ChannelHandlerContext ctx) throws Exception;
 
@@ -303,9 +303,9 @@ public abstract class ProxyHandler extends ChannelDuplexHandler {
                 }
                 connectPromise.trySuccess(ctx.channel());
             } else {
-                // We are at inconsistent state because we failed to remove all codec handlers.
+                // We are at inconsistent state because we failed to remove all damo handlers.
                 Exception cause = new ProxyConnectException(
-                        "failed to remove all codec handlers added by the proxy handler; bug?");
+                        "failed to remove all damo handlers added by the proxy handler; bug?");
                 failPendingWritesAndClose(cause);
             }
         }

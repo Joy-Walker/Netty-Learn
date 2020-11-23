@@ -76,7 +76,7 @@ import static java.lang.Math.min;
  * <h3>Reference Counting</h3>
  *
  * Some {@link Http2StreamFrame}s implement the {@link ReferenceCounted} interface, as they carry
- * reference counted objects (e.g. {@link ByteBuf}s). The multiplex codec will call {@link ReferenceCounted#retain()}
+ * reference counted objects (e.g. {@link ByteBuf}s). The multiplex damo will call {@link ReferenceCounted#retain()}
  * before propagating a reference counted object through the pipeline, and thus an application handler needs to release
  * such an object after having consumed it. For more information on reference counting take a look at
  * http://netty.io/wiki/reference-counted-objects.html

@@ -19,7 +19,7 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.internal.PlatformDependent;
 
 /**
- * Utilities for codec-redis.
+ * Utilities for damo-redis.
  */
 final class RedisCodecUtil {
 

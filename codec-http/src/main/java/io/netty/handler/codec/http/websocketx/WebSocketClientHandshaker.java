@@ -266,7 +266,7 @@ public abstract class WebSocketClientHandshaker {
                         "a HttpRequestEncoder or HttpClientCodec");
             }
             final HttpClientCodec codec =  (HttpClientCodec) ctx.handler();
-            // Remove the encoder part of the codec as the user may start writing frames after this method returns.
+            // Remove the encoder part of the damo as the user may start writing frames after this method returns.
             codec.removeOutboundHandler();
 
             p.addAfter(ctx.name(), "ws-decoder", newWebsocketDecoder());
@@ -282,7 +282,7 @@ public abstract class WebSocketClientHandshaker {
             });
         } else {
             if (p.get(HttpRequestEncoder.class) != null) {
-                // Remove the encoder part of the codec as the user may start writing frames after this method returns.
+                // Remove the encoder part of the damo as the user may start writing frames after this method returns.
                 p.remove(HttpRequestEncoder.class);
             }
             final ChannelHandlerContext context = ctx;

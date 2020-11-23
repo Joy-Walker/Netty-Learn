@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * A WebSocket Extension data from the <tt>Sec-WebSocket-Extensions</tt> header.
  *
- * See <tt>io.netty.handler.codec.http.HttpHeaders.Names.SEC_WEBSOCKET_EXTENSIONS</tt>.
+ * See <tt>io.netty.handler.damo.http.HttpHeaders.Names.SEC_WEBSOCKET_EXTENSIONS</tt>.
  */
 public final class WebSocketExtensionData {
 

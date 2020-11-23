@@ -50,7 +50,7 @@ public final class CleartextHttp2ServerUpgradeHandler extends ChannelHandlerAdap
      * Creates the channel handler provide cleartext HTTP/2 upgrade from HTTP
      * upgrade or prior knowledge
      *
-     * @param httpServerCodec the http server codec
+     * @param httpServerCodec the http server damo
      * @param httpServerUpgradeHandler the http server upgrade handler for HTTP/2
      * @param http2ServerHandler the http2 server handler, will be added into pipeline
      *                           when starting HTTP/2 by prior knowledge
@@ -85,7 +85,7 @@ public final class CleartextHttp2ServerUpgradeHandler extends ChannelHandlerAdap
                                     in, in.readerIndex(), bytesRead)) {
                 ctx.pipeline().remove(this);
             } else if (bytesRead == prefaceLength) {
-                // Full h2 preface match, removed source codec, using http2 codec to handle
+                // Full h2 preface match, removed source damo, using http2 damo to handle
                 // following network traffic
                 ctx.pipeline()
                    .remove(httpServerCodec)

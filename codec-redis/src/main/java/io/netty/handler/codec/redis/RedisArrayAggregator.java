@@ -69,9 +69,9 @@ public final class RedisArrayAggregator extends MessageToMessageDecoder<RedisMes
         } else if (header.length() == 0L) {
             return ArrayRedisMessage.EMPTY_INSTANCE;
         } else if (header.length() > 0L) {
-            // Currently, this codec doesn't support `long` length for arrays because Java's List.size() is int.
+            // Currently, this damo doesn't support `long` length for arrays because Java's List.size() is int.
             if (header.length() > Integer.MAX_VALUE) {
-                throw new CodecException("this codec doesn't support longer length than " + Integer.MAX_VALUE);
+                throw new CodecException("this damo doesn't support longer length than " + Integer.MAX_VALUE);
             }
 
             // start aggregating array

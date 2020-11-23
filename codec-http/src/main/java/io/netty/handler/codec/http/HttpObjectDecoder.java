@@ -387,7 +387,7 @@ public abstract class HttpObjectDecoder extends ByteToMessageDecoder {
             int readableBytes = buffer.readableBytes();
             if (readableBytes > 0) {
                 // Keep on consuming as otherwise we may trigger an DecoderException,
-                // other handler will replace this codec with the upgraded protocol codec to
+                // other handler will replace this damo with the upgraded protocol damo to
                 // take the traffic over at some point then.
                 // See https://github.com/netty/netty/issues/2173
                 out.add(buffer.readBytes(readableBytes));

@@ -50,7 +50,7 @@ import static io.netty.handler.codec.http2.Http2CodecUtil.isStreamIdValid;
  *
  * <h3>Stream Lifecycle</h3>
  *
- * The frame codec delivers and writes frames for active streams. An active stream is closed when either side sends a
+ * The frame damo delivers and writes frames for active streams. An active stream is closed when either side sends a
  * {@code RST_STREAM} frame or both sides send a frame with the {@code END_STREAM} flag set. Each
  * {@link Http2StreamFrame} has a {@link Http2FrameStream} object attached that uniquely identifies a particular stream.
  *
@@ -60,10 +60,10 @@ import static io.netty.handler.codec.http2.Http2CodecUtil.isStreamIdValid;
  *
  * <h3>Flow control</h3>
  *
- * The frame codec automatically increments stream and connection flow control windows.
+ * The frame damo automatically increments stream and connection flow control windows.
  *
  * <p>Incoming flow controlled frames need to be consumed by writing a {@link Http2WindowUpdateFrame} with the consumed
- * number of bytes and the corresponding stream identifier set to the frame codec.
+ * number of bytes and the corresponding stream identifier set to the frame damo.
  *
  * <p>The local stream-level flow control window can be changed by writing a {@link Http2SettingsFrame} with the
  * {@link Http2Settings#initialWindowSize()} set to the targeted value.
@@ -128,7 +128,7 @@ import static io.netty.handler.codec.http2.Http2CodecUtil.isStreamIdValid;
  * <h3>Reference Counting</h3>
  *
  * Some {@link Http2StreamFrame}s implement the {@link ReferenceCounted} interface, as they carry
- * reference counted objects (e.g. {@link ByteBuf}s). The frame codec will call {@link ReferenceCounted#retain()} before
+ * reference counted objects (e.g. {@link ByteBuf}s). The frame damo will call {@link ReferenceCounted#retain()} before
  * propagating a reference counted object through the pipeline, and thus an application handler needs to release such
  * an object after having consumed it. For more information on reference counting take a look at
  * http://netty.io/wiki/reference-counted-objects.html
