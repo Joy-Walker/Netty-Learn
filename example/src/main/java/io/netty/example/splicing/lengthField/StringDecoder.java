@@ -15,8 +15,14 @@ public class StringDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
+        int length = msg.readableBytes();
 
-        System.out.println("StringDecoder 被调用");
-        out.add(msg.toString(CharsetUtil.UTF_8));
+        if(length == 0){
+            System.out.println("本次没有读取到任何数据。");
+            return;
+        }
+        byte[] arr = new byte[length];
+        msg.readBytes(arr,0,length);
+        out.add(new String(arr,CharsetUtil.UTF_8));
     }
 }
