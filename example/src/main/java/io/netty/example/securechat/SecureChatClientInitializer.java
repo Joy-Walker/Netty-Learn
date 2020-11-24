@@ -46,7 +46,7 @@ public class SecureChatClientInitializer extends ChannelInitializer<SocketChanne
         // and server in the real world.
         pipeline.addLast(sslCtx.newHandler(ch.alloc(), SecureChatClient.HOST, SecureChatClient.PORT));
 
-        // On top of the SSL handler, add the text line damo.
+        // On top of the SSL handler, add the text line demo.
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
         pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());

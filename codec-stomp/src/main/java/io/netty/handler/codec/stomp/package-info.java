@@ -15,6 +15,6 @@
  */
 
 /**
- * <a href="http://en.wikipedia.org/wiki/Streaming_Text_Oriented_Messaging_Protocol">STOMP</a> damo
+ * <a href="http://en.wikipedia.org/wiki/Streaming_Text_Oriented_Messaging_Protocol">STOMP</a> demo
  */
 package io.netty.handler.codec.stomp;

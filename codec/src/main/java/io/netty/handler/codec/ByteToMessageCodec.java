@@ -90,7 +90,7 @@ public abstract class ByteToMessageCodec<I> extends ChannelDuplexHandler {
     }
 
     /**
-     * Returns {@code true} if and only if the specified message can be encoded by this damo.
+     * Returns {@code true} if and only if the specified message can be encoded by this demo.
      *
      * @param msg the message
      */

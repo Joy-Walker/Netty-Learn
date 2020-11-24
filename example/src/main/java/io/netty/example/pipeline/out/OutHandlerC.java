@@ -15,12 +15,14 @@ public class OutHandlerC extends ChannelOutboundHandlerAdapter {
 
         String s = msg.toString();
         System.out.println("C: " + s);
-        ctx.write(msg);
+        ctx.writeAndFlush(msg);
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        ctx.pipeline().write("hello world");
+//        ctx.pipeline().write("hello world");
+//        ctx.write("hello world");
+        ctx.channel().write("hello world");
     }
 
 }

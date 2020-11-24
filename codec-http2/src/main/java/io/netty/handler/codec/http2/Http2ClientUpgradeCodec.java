@@ -37,7 +37,7 @@ import static io.netty.util.ReferenceCountUtil.release;
 import static io.netty.util.internal.ObjectUtil.checkNotNull;
 
 /**
- * Client-side cleartext upgrade damo from HTTP to HTTP/2.
+ * Client-side cleartext upgrade demo from HTTP to HTTP/2.
  */
 @UnstableApi
 public class Http2ClientUpgradeCodec implements HttpClientUpgradeHandler.UpgradeCodec {
@@ -57,7 +57,7 @@ public class Http2ClientUpgradeCodec implements HttpClientUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the damo using a default name for the connection handler when adding to the
+     * Creates the demo using a default name for the connection handler when adding to the
      * pipeline.
      *
      * @param connectionHandler the HTTP/2 connection handler
@@ -67,7 +67,7 @@ public class Http2ClientUpgradeCodec implements HttpClientUpgradeHandler.Upgrade
     }
 
     /**
-     * Creates the damo providing an upgrade to the given handler for HTTP/2.
+     * Creates the demo providing an upgrade to the given handler for HTTP/2.
      *
      * @param handlerName the name of the HTTP/2 connection handler to be used in the pipeline,
      *                    or {@code null} to auto-generate the name

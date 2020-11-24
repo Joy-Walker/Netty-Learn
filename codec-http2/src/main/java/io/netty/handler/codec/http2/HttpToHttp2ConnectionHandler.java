@@ -46,7 +46,7 @@ public class HttpToHttp2ConnectionHandler extends Http2ConnectionHandler {
     }
 
     /**
-     * Get the next stream id either from the {@link HttpHeaders} object or HTTP/2 damo
+     * Get the next stream id either from the {@link HttpHeaders} object or HTTP/2 demo
      *
      * @param httpHeaders The HTTP/1.x headers object to look for the stream id
      * @return The stream id to use with this {@link HttpHeaders} object

@@ -19,7 +19,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.handler.codec.http.websocketx.extensions.WebSocketClientExtensionHandler;
 
 /**
- * Extends <tt>io.netty.handler.damo.http.websocketx.extensions.compression.WebSocketClientExtensionHandler</tt>
+ * Extends <tt>io.netty.handler.demo.http.websocketx.extensions.compression.WebSocketClientExtensionHandler</tt>
  * to handle the most common WebSocket Compression Extensions.
  *
  * See <tt>io.netty.example.http.websocketx.client.WebSocketClient</tt> for usage.

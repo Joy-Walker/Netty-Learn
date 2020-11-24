@@ -59,28 +59,28 @@ public class HttpClientUpgradeHandler extends HttpObjectAggregator implements Ch
     }
 
     /**
-     * The source damo that is used in the pipeline initially.
+     * The source demo that is used in the pipeline initially.
      */
     public interface SourceCodec {
 
         /**
-         * Removes or disables the encoder of this damo so that the {@link UpgradeCodec} can send an initial greeting
+         * Removes or disables the encoder of this demo so that the {@link UpgradeCodec} can send an initial greeting
          * (if any).
          */
         void prepareUpgradeFrom(ChannelHandlerContext ctx);
 
         /**
-         * Removes this damo (i.e. all associated handlers) from the pipeline.
+         * Removes this demo (i.e. all associated handlers) from the pipeline.
          */
         void upgradeFrom(ChannelHandlerContext ctx);
     }
 
     /**
-     * A damo that the source can be upgraded to.
+     * A demo that the source can be upgraded to.
      */
     public interface UpgradeCodec {
         /**
-         * Returns the name of the protocol supported by this damo, as indicated by the {@code 'UPGRADE'} header.
+         * Returns the name of the protocol supported by this demo, as indicated by the {@code 'UPGRADE'} header.
          */
         CharSequence protocol();
 
@@ -91,7 +91,7 @@ public class HttpClientUpgradeHandler extends HttpObjectAggregator implements Ch
         Collection<CharSequence> setUpgradeHeaders(ChannelHandlerContext ctx, HttpRequest upgradeRequest);
 
         /**
-         * Performs an HTTP protocol upgrade from the source damo. This method is responsible for
+         * Performs an HTTP protocol upgrade from the source demo. This method is responsible for
          * adding all handlers required for the new protocol.
          *
          * @param ctx the context for the current handler.
@@ -108,8 +108,8 @@ public class HttpClientUpgradeHandler extends HttpObjectAggregator implements Ch
     /**
      * Constructs the client upgrade handler.
      *
-     * @param sourceCodec the damo that is being used initially.
-     * @param upgradeCodec the damo that the client would like to upgrade to.
+     * @param sourceCodec the demo that is being used initially.
+     * @param upgradeCodec the demo that the client would like to upgrade to.
      * @param maxContentLength the maximum length of the aggregated content.
      */
     public HttpClientUpgradeHandler(SourceCodec sourceCodec, UpgradeCodec upgradeCodec,

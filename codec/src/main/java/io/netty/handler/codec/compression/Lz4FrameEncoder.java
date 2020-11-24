@@ -125,7 +125,7 @@ public class Lz4FrameEncoder extends MessageToByteEncoder<ByteBuf> {
      * and xxhash hashing for Java, based on Yann Collet's work available at
      * <a href="https://github.com/Cyan4973/xxHash">Github</a>.
      *
-     * @param highCompressor  if {@code true} damo will use compressor which requires more memory
+     * @param highCompressor  if {@code true} demo will use compressor which requires more memory
      *                        and is slower but compresses more efficiently
      */
     public Lz4FrameEncoder(boolean highCompressor) {
@@ -139,7 +139,7 @@ public class Lz4FrameEncoder extends MessageToByteEncoder<ByteBuf> {
      * @param factory         user customizable {@link LZ4Factory} instance
      *                        which may be JNI bindings to the original C implementation, a pure Java implementation
      *                        or a Java implementation that uses the {@link sun.misc.Unsafe}
-     * @param highCompressor  if {@code true} damo will use compressor which requires more memory
+     * @param highCompressor  if {@code true} demo will use compressor which requires more memory
      *                        and is slower but compresses more efficiently
      * @param blockSize       the maximum number of bytes to try to compress at once,
      *                        must be >= 64 and <= 32 M
@@ -155,7 +155,7 @@ public class Lz4FrameEncoder extends MessageToByteEncoder<ByteBuf> {
          * @param factory         user customizable {@link LZ4Factory} instance
          *                        which may be JNI bindings to the original C implementation, a pure Java implementation
          *                        or a Java implementation that uses the {@link sun.misc.Unsafe}
-         * @param highCompressor  if {@code true} damo will use compressor which requires more memory
+         * @param highCompressor  if {@code true} demo will use compressor which requires more memory
          *                        and is slower but compresses more efficiently
          * @param blockSize       the maximum number of bytes to try to compress at once,
          *                        must be >= 64 and <= 32 M

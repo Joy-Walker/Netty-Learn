@@ -16,7 +16,7 @@
 package io.netty.handler.codec;
 
 /**
- * An {@link Exception} which is thrown by a damo.
+ * An {@link Exception} which is thrown by a demo.
  */
 public class CodecException extends RuntimeException {
 

@@ -24,7 +24,7 @@ import java.util.RandomAccess;
 import static io.netty.util.internal.ObjectUtil.checkNotNull;
 
 /**
- * Special {@link AbstractList} implementation which is used within our damo base classes.
+ * Special {@link AbstractList} implementation which is used within our demo base classes.
  */
 final class CodecOutputList extends AbstractList<Object> implements RandomAccess {
 

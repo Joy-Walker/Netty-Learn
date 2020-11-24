@@ -64,7 +64,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * Test for data decompression in the HTTP/2 damo.
+ * Test for data decompression in the HTTP/2 demo.
  */
 public class DataCompressionHttp2Test {
     private static final AsciiString GET = new AsciiString("GET");

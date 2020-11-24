@@ -145,8 +145,8 @@ public class InboundHttp2ToHttpAdapter extends Http2EventAdapter {
      * @param headers The headers associated with {@code stream}
      * @param validateHttpHeaders
      * <ul>
-     * <li>{@code true} to validate HTTP headers in the http-damo</li>
-     * <li>{@code false} not to validate HTTP headers in the http-damo</li>
+     * <li>{@code true} to validate HTTP headers in the http-demo</li>
+     * <li>{@code false} not to validate HTTP headers in the http-demo</li>
      * </ul>
      * @param alloc The {@link ByteBufAllocator} to use to generate the content of the message
      * @throws Http2Exception

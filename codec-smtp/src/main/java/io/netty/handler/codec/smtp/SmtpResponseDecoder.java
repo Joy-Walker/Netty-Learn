@@ -102,7 +102,7 @@ public final class SmtpResponseDecoder extends LineBasedFrameDecoder {
     }
 
     /**
-     * Parses the io.netty.handler.damo.smtp code without any allocation, which is three digits.
+     * Parses the io.netty.handler.demo.smtp code without any allocation, which is three digits.
      */
     private static int parseCode(ByteBuf buffer) {
         final int first = parseNumber(buffer.readByte()) * 100;

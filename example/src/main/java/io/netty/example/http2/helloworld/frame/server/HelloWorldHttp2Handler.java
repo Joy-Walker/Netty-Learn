@@ -37,7 +37,7 @@ import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 /**
  * A simple handler that responds with the message "Hello World!".
  *
- * <p>This example is making use of the "frame damo" http2 API. This API is very experimental and incomplete.
+ * <p>This example is making use of the "frame demo" http2 API. This API is very experimental and incomplete.
  */
 @Sharable
 public class HelloWorldHttp2Handler extends ChannelDuplexHandler {

@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * Deflate implementation of a payload compressor for
- * <tt>io.netty.handler.damo.http.websocketx.WebSocketFrame</tt>.
+ * <tt>io.netty.handler.demo.http.websocketx.WebSocketFrame</tt>.
  */
 abstract class DeflateEncoder extends WebSocketExtensionEncoder {
 

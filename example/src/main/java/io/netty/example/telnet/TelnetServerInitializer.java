@@ -48,7 +48,7 @@ public class TelnetServerInitializer extends ChannelInitializer<SocketChannel> {
             pipeline.addLast(sslCtx.newHandler(ch.alloc()));
         }
 
-        // Add the text line damo combination first,
+        // Add the text line demo combination first,
         pipeline.addLast(new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
         // the encoder and decoder are static as these are sharable
         pipeline.addLast(DECODER);

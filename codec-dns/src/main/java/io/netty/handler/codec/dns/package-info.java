@@ -15,7 +15,7 @@
  */
 
 /**
- * DNS damo.
+ * DNS demo.
  */
 @UnstableApi
 package io.netty.handler.codec.dns;

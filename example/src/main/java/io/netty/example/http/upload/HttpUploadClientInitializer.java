@@ -39,7 +39,7 @@ public class HttpUploadClientInitializer extends ChannelInitializer<SocketChanne
             pipeline.addLast("ssl", sslCtx.newHandler(ch.alloc()));
         }
 
-        pipeline.addLast("damo", new HttpClientCodec());
+        pipeline.addLast("demo", new HttpClientCodec());
 
         // Remove the following line if you don't want automatic content decompression.
         pipeline.addLast("inflater", new HttpContentDecompressor());

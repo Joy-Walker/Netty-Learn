@@ -15,6 +15,6 @@
  */
 
 /**
- * Decoder and encoders to manage message completion and multi-streaming damo in SCTP/IP.
+ * Decoder and encoders to manage message completion and multi-streaming demo in SCTP/IP.
  */
 package io.netty.handler.codec.sctp;

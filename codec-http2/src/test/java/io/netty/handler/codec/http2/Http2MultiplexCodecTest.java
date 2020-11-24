@@ -275,7 +275,7 @@ public class Http2MultiplexCodecTest {
                                                        .stream(inboundStream));
         codec.onChannelReadComplete();
 
-        // This will be called by the frame damo.
+        // This will be called by the frame demo.
         inboundStream.state = Http2Stream.State.CLOSED;
         codec.onHttp2StreamStateChanged(inboundStream);
         parentChannel.runPendingTasks();
@@ -606,11 +606,11 @@ public class Http2MultiplexCodecTest {
     }
 
     /**
-     * Simulates the frame damo, in first assigning an identifier and the completing the write promise.
+     * Simulates the frame demo, in first assigning an identifier and the completing the write promise.
      */
     private Http2FrameStream readOutboundHeadersAndAssignId() {
         // Only peek at the frame, so to not complete the promise of the write. We need to first
-        // assign a stream identifier, as the frame damo would do.
+        // assign a stream identifier, as the frame demo would do.
         Http2HeadersFrame headersFrame = (Http2HeadersFrame) parentChannel.outboundMessages().peek();
         assertNotNull(headersFrame);
         assertNotNull(headersFrame.stream());
@@ -625,7 +625,7 @@ public class Http2MultiplexCodecTest {
 
     /**
      * This class removes the bits that would transform the frames to bytes and so make it easier to test the actual
-     * special handling of the damo.
+     * special handling of the demo.
      */
     private final class TestableHttp2MultiplexCodec extends Http2MultiplexCodec {
 

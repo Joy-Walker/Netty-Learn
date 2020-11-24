@@ -500,7 +500,7 @@
         <scope>test</scope>
       </dependency>
 
-      <!-- Test dependency for Bzip2 compression damo -->
+      <!-- Test dependency for Bzip2 compression demo -->
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>

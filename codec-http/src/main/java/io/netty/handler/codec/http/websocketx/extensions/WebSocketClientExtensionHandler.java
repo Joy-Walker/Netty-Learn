@@ -36,7 +36,7 @@ import java.util.List;
  * and initializes the channel pipeline with the extension decoder and encoder.
  *
  * Find a basic implementation for compression extensions at
- * <tt>io.netty.handler.damo.http.websocketx.extensions.compression.WebSocketClientCompressionHandler</tt>.
+ * <tt>io.netty.handler.demo.http.websocketx.extensions.compression.WebSocketClientCompressionHandler</tt>.
  */
 public class WebSocketClientExtensionHandler extends ChannelDuplexHandler {
 

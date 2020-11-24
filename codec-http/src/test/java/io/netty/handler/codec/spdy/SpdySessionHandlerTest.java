@@ -132,7 +132,7 @@ public class SpdySessionHandlerTest {
         assertNull(sessionHandler.readOutbound());
         remoteStreamId += 2;
 
-        // Check if frame damo correctly compresses/uncompresses headers
+        // Check if frame demo correctly compresses/uncompresses headers
         sessionHandler.writeInbound(spdySynStreamFrame);
         assertSynReply(sessionHandler.readOutbound(), localStreamId, false, spdySynStreamFrame.headers());
         assertNull(sessionHandler.readOutbound());

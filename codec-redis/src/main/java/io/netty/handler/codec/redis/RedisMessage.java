@@ -18,7 +18,7 @@ package io.netty.handler.codec.redis;
 import io.netty.util.internal.UnstableApi;
 
 /**
- * RedisMessage is base interface for damo-redis.
+ * RedisMessage is base interface for demo-redis.
  */
 @UnstableApi
 public interface RedisMessage {

@@ -85,7 +85,7 @@ public class HttpServerUpgradeHandlerTest {
                 inReadCall = true;
                 try {
                     super.channelRead(ctx, msg);
-                    // All in the same call stack, the upgrade damo should receive the message,
+                    // All in the same call stack, the upgrade demo should receive the message,
                     // written the upgrade response, and upgraded the pipeline.
                     assertTrue(writeUpgradeMessage);
                     assertFalse(writeFlushed);

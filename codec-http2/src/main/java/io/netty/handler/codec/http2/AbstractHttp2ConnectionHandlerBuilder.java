@@ -85,20 +85,20 @@ public abstract class AbstractHttp2ConnectionHandlerBuilder<T extends Http2Conne
     private Http2FrameListener frameListener;
     private long gracefulShutdownTimeoutMillis = Http2CodecUtil.DEFAULT_GRACEFUL_SHUTDOWN_TIMEOUT_MILLIS;
 
-    // The property that will prohibit connection() and damo() if set by server(),
+    // The property that will prohibit connection() and demo() if set by server(),
     // because this property is used only when this builder creates a Http2Connection.
     private Boolean isServer;
     private Integer maxReservedStreams;
 
-    // The property that will prohibit server() and damo() if set by connection().
+    // The property that will prohibit server() and demo() if set by connection().
     private Http2Connection connection;
 
-    // The properties that will prohibit server() and connection() if set by damo().
+    // The properties that will prohibit server() and connection() if set by demo().
     private Http2ConnectionDecoder decoder;
     private Http2ConnectionEncoder encoder;
 
     // The properties that are:
-    // * mutually exclusive against damo() and
+    // * mutually exclusive against demo() and
     // * OK to use with server() and connection()
     private Boolean validateHeaders;
     private Http2FrameLogger frameLogger;
@@ -174,8 +174,8 @@ public abstract class AbstractHttp2ConnectionHandlerBuilder<T extends Http2Conne
      */
     protected B server(boolean isServer) {
         enforceConstraint("server", "connection", connection);
-        enforceConstraint("server", "damo", decoder);
-        enforceConstraint("server", "damo", encoder);
+        enforceConstraint("server", "demo", decoder);
+        enforceConstraint("server", "demo", encoder);
 
         this.isServer = isServer;
         return self();
@@ -197,8 +197,8 @@ public abstract class AbstractHttp2ConnectionHandlerBuilder<T extends Http2Conne
      */
     protected B maxReservedStreams(int maxReservedStreams) {
         enforceConstraint("server", "connection", connection);
-        enforceConstraint("server", "damo", decoder);
-        enforceConstraint("server", "damo", encoder);
+        enforceConstraint("server", "demo", decoder);
+        enforceConstraint("server", "demo", encoder);
 
         this.maxReservedStreams = checkPositiveOrZero(maxReservedStreams, "maxReservedStreams");
         return self();
@@ -219,8 +219,8 @@ public abstract class AbstractHttp2ConnectionHandlerBuilder<T extends Http2Conne
     protected B connection(Http2Connection connection) {
         enforceConstraint("connection", "maxReservedStreams", maxReservedStreams);
         enforceConstraint("connection", "server", isServer);
-        enforceConstraint("connection", "damo", decoder);
-        enforceConstraint("connection", "damo", encoder);
+        enforceConstraint("connection", "demo", decoder);
+        enforceConstraint("connection", "demo", encoder);
 
         this.connection = checkNotNull(connection, "connection");
 
@@ -249,13 +249,13 @@ public abstract class AbstractHttp2ConnectionHandlerBuilder<T extends Http2Conne
      * Sets the {@link Http2ConnectionDecoder} and {@link Http2ConnectionEncoder} to use.
      */
     protected B codec(Http2ConnectionDecoder decoder, Http2ConnectionEncoder encoder) {
-        enforceConstraint("damo", "server", isServer);
-        enforceConstraint("damo", "maxReservedStreams", maxReservedStreams);
-        enforceConstraint("damo", "connection", connection);
-        enforceConstraint("damo", "frameLogger", frameLogger);
-        enforceConstraint("damo", "validateHeaders", validateHeaders);
-        enforceConstraint("damo", "headerSensitivityDetector", headerSensitivityDetector);
-        enforceConstraint("damo", "encoderEnforceMaxConcurrentStreams", encoderEnforceMaxConcurrentStreams);
+        enforceConstraint("demo", "server", isServer);
+        enforceConstraint("demo", "maxReservedStreams", maxReservedStreams);
+        enforceConstraint("demo", "connection", connection);
+        enforceConstraint("demo", "frameLogger", frameLogger);
+        enforceConstraint("demo", "validateHeaders", validateHeaders);
+        enforceConstraint("demo", "headerSensitivityDetector", headerSensitivityDetector);
+        enforceConstraint("demo", "encoderEnforceMaxConcurrentStreams", encoderEnforceMaxConcurrentStreams);
 
         checkNotNull(decoder, "decoder");
         checkNotNull(encoder, "encoder");

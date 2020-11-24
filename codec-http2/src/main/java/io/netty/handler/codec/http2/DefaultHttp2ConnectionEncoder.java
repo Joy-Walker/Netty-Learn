@@ -210,7 +210,7 @@ public class DefaultHttp2ConnectionEncoder implements Http2ConnectionEncoder {
                     // Synchronously set the headersSent flag to ensure that we do not subsequently write
                     // other headers containing pseudo-header fields.
                     //
-                    // This just sets internal stream state which is used elsewhere in the damo and doesn't
+                    // This just sets internal stream state which is used elsewhere in the demo and doesn't
                     // necessarily mean the write will complete successfully.
                     stream.headersSent(isInformational);
 
@@ -293,7 +293,7 @@ public class DefaultHttp2ConnectionEncoder implements Http2ConnectionEncoder {
             // Writing headers may fail during the encode state if they violate HPACK limits.
             Throwable failureCause = future.cause();
             if (failureCause == null) {
-                // This just sets internal stream state which is used elsewhere in the damo and doesn't
+                // This just sets internal stream state which is used elsewhere in the demo and doesn't
                 // necessarily mean the write will complete successfully.
                 stream.pushPromiseSent();
 
@@ -501,7 +501,7 @@ public class DefaultHttp2ConnectionEncoder implements Http2ConnectionEncoder {
             // Writing headers may fail during the encode state if they violate HPACK limits.
             Throwable failureCause = f.cause();
             if (failureCause == null) {
-                // This just sets internal stream state which is used elsewhere in the damo and doesn't
+                // This just sets internal stream state which is used elsewhere in the demo and doesn't
                 // necessarily mean the write will complete successfully.
                 stream.headersSent(isInformational);
             }

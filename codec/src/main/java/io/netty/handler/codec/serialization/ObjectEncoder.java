@@ -32,16 +32,22 @@ import java.io.Serializable;
  * compatible with the standard {@link ObjectInputStream}.  Please use
  * {@link ObjectDecoder} or {@link ObjectDecoderInputStream} to ensure the
  * interoperability with this encoder.
+ *
+ *
+ *  Object -> byte[]
  */
 @Sharable
 public class ObjectEncoder extends MessageToByteEncoder<Serializable> {
+
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
+
         int startIdx = out.writerIndex();
 
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
+
         ObjectOutputStream oout = null;
         try {
             bout.write(LENGTH_PLACEHOLDER);

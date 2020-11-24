@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.splicing.damo;
+package io.netty.example.splicing.lengthField;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,19 +27,16 @@ import io.netty.util.ReferenceCountUtil;
 
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
-    private int count = 0;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-        ByteBuf message = (ByteBuf) msg;
-        System.out.println("服务端收到消息" + message.toString(CharsetUtil.UTF_8));
-        count++;
+        String message = (String) msg;
+        System.out.println("服务端收到消息" + message);
         ReferenceCountUtil.release(msg);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
-        System.out.println("服务端读取了" + count + "次数据");
     }
 
     @Override

@@ -16,7 +16,7 @@
 package io.netty.handler.codec;
 
 /**
- * Thrown if an unsupported message is received by an damo.
+ * Thrown if an unsupported message is received by an demo.
  */
 public class UnsupportedMessageTypeException extends CodecException {
 

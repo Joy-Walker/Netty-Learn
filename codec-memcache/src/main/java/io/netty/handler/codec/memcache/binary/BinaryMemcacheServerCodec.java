@@ -19,9 +19,9 @@ import io.netty.channel.CombinedChannelDuplexHandler;
 import io.netty.util.internal.UnstableApi;
 
 /**
- * The full server damo that combines the correct encoder and decoder.
+ * The full server demo that combines the correct encoder and decoder.
  * <p/>
- * Use this damo if you need to implement a server that speaks the memcache binary protocol.
+ * Use this demo if you need to implement a server that speaks the memcache binary protocol.
  * Internally, it combines the {@link BinaryMemcacheRequestDecoder} and the
  * {@link BinaryMemcacheResponseEncoder} to request decoding and response encoding.
  */

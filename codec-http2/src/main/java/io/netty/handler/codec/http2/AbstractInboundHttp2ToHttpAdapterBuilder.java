@@ -84,8 +84,8 @@ public abstract class AbstractInboundHttp2ToHttpAdapterBuilder<
      *
      * @param validate
      * <ul>
-     * <li>{@code true} to validate HTTP headers in the http-damo</li>
-     * <li>{@code false} not to validate HTTP headers in the http-damo</li>
+     * <li>{@code true} to validate HTTP headers in the http-demo</li>
+     * <li>{@code false} not to validate HTTP headers in the http-demo</li>
      * </ul>
      * @return {@link AbstractInboundHttp2ToHttpAdapterBuilder} the builder for the {@link InboundHttp2ToHttpAdapter}
      */

@@ -29,7 +29,7 @@ public interface Http2FrameListener {
      *
      * @param ctx the context from the handler where the frame was read.
      * @param streamId the subject stream for the frame.
-     * @param data payload buffer for the frame. This buffer will be released by the damo.
+     * @param data payload buffer for the frame. This buffer will be released by the demo.
      * @param padding additional bytes that should be added to obscure the true content size. Must be between 0 and
      *                256 (inclusive).
      * @param endOfStream Indicates whether this is the last frame to be sent from the remote endpoint for this stream.

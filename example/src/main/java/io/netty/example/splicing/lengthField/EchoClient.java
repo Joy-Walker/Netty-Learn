@@ -13,13 +13,14 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.splicing.damo;
+package io.netty.example.splicing.lengthField;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldPrepender;
 
 /**
  * Sends one message when a connection is open and echoes back any received
@@ -47,6 +48,8 @@ public final class EchoClient {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
+
+                     p.addLast(new StringEncoder());
                      p.addLast(new EchoClientHandler());
                  }
              });
