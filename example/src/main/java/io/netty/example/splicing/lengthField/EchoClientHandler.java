@@ -30,7 +30,11 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        ctx.writeAndFlush("hello netty");
+        for(int i = 0; i < 1000; i++){
+            ctx.writeAndFlush("hello netty");
+            count++;
+        }
+        System.out.println("发送" + count + "次数据。");
     }
 
     @Override

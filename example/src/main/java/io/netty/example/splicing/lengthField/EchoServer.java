@@ -50,7 +50,7 @@ public final class EchoServer {
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
 
-//                     p.addLast(new LengthFieldBasedFrameDecoder(65535,0,2,0,0));
+                     p.addLast(new LengthFieldBasedFrameDecoder(65535,0,2,0,0));
                      p.addLast(new StringDecoder());
                      p.addLast(new EchoServerHandler());
                  }

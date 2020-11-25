@@ -23,8 +23,6 @@ public class StringEncoder extends MessageToByteEncoder<String> {
         if(msg.length() == 0){
             return;
         }
-        System.out.println("StringEncoder 被调用");
         out.writeBytes(msg.getBytes(CharsetUtil.UTF_8));
-
     }
 }

@@ -85,6 +85,11 @@ public abstract class ByteToMessageDecoder extends ChannelInboundHandlerAdapter 
         @Override
         public ByteBuf cumulate(ByteBufAllocator alloc, ByteBuf cumulation, ByteBuf in) {
             final ByteBuf buffer;
+
+//             if(writeIndex + readableBytes > maxCapcaity){
+//                 扩容
+//             }
+
             if (cumulation.writerIndex() > cumulation.maxCapacity() - in.readableBytes()
                     || cumulation.refCnt() > 1 || cumulation.isReadOnly()) {
                 // Expand cumulation (by replace it) when either there is not more room in the buffer
@@ -421,47 +426,36 @@ public abstract class ByteToMessageDecoder extends ChannelInboundHandlerAdapter 
     protected void callDecode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         try {
             while (in.isReadable()) {
-                // 记录一下初始容量
+                // 解析出来的对象的个数初始值
                 int outSize = out.size();
-
                 // 解码产生的对象向下传播
                 if (outSize > 0) {
                     // 里面存在对象
                     fireChannelRead(ctx, out, outSize);
                     out.clear();
-
-                    // Check if this handler was removed before continuing with decoding.
-                    // If it was removed, it is not safe to continue to operate on the buffer.
-                    //
-                    // See:
-                    // - https://github.com/netty/netty/issues/4635
                     if (ctx.isRemoved()) {
                         break;
                     }
                     outSize = 0;
                 }
-                // 可读的字节数目记录下来
+                // ********可读的字节数目记录下来******
                 int oldInputLength = in.readableBytes();
+                // 调用子类的decoder方法
                 decodeRemovalReentryProtection(ctx, in, out);    //decode(ctx, in, out);
-
-                // Check if this handler was removed before continuing the loop.
-                // If it was removed, it is not safe to continue to operate on the buffer.
-                //
-                // See https://github.com/netty/netty/issues/1664
                 if (ctx.isRemoved()) {
                     break;
                 }
-                // 没有读取到数据
+                // 没有解析出来对象
                 if (outSize == out.size()) {
                     // 解码器未读取任何数据
                     if (oldInputLength == in.readableBytes()) {
                         break;
                     } else {
-                        // 解码器读取到部分数据
+                        // 解码器读取到部分数据，但不够解析出来一个对象
                         continue;
                     }
                 }
-
+                // 已经解析出来了对象，但是可读的字节和之前的字节是相等的，也就是说解析出来了对象，但是没有读取走字节
                 if (oldInputLength == in.readableBytes()) {
                     throw new DecoderException(
                             StringUtil.simpleClassName(getClass()) +

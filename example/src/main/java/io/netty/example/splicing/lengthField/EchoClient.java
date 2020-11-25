@@ -48,7 +48,7 @@ public final class EchoClient {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
-
+                     p.addLast(new LengthFieldPrepender(2));
                      p.addLast(new StringEncoder());
                      p.addLast(new EchoClientHandler());
                  }
