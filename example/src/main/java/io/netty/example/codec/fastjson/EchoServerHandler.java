@@ -13,12 +13,11 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.splicing.lengthField;
+package io.netty.example.codec.fastjson;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
+import io.netty.example.codec.fastjson.vo.User;
 import io.netty.util.ReferenceCountUtil;
 
 /**
@@ -26,19 +25,19 @@ import io.netty.util.ReferenceCountUtil;
  */
 
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
-    private int count;
+    int count = 0;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-        String message = (String) msg;
-        System.out.println("服务端收到消息" + message);
+        User user = (User) msg;
+        System.out.println("服务端收到消息" + user);
         count++;
         ReferenceCountUtil.release(msg);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
-        System.out.println("总共读取了"+count+"次数据.");
+        System.out.println("服务端收到"+count+"次数据。");
     }
 
     @Override

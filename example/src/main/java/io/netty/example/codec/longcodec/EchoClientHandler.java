@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.codec;
+package io.netty.example.codec.longcodec;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

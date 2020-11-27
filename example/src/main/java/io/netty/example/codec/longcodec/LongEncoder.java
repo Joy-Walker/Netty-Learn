@@ -1,4 +1,4 @@
-package io.netty.example.codec;
+package io.netty.example.codec.longcodec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

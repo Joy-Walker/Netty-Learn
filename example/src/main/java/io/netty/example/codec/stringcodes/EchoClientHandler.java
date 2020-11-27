@@ -13,53 +13,41 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.splicing.lengthField;
+package io.netty.example.codec.stringcodes;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
-import io.netty.util.ReferenceCountUtil;
 
 /**
- * Handler implementation for the echo server.
+ * Handler implementation for the echo client.  It initiates the ping-pong
+ * traffic between the echo client and server by sending the first message to
+ * the server.
  */
+public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+    private int count = 0;
 
-public class EchoServerHandler extends ChannelInboundHandlerAdapter {
-    private int count;
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) {
+        for(int i = 0; i < 1000; i++){
+            ctx.writeAndFlush("hello netty");
+            count++;
+        }
+        System.out.println("发送" + count + "次数据。");
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 
-        String message = (String) msg;
-        System.out.println("服务端收到消息" + message);
-        count++;
-        ReferenceCountUtil.release(msg);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
-        System.out.println("总共读取了"+count+"次数据.");
+       ctx.flush();
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        // Close the connection when an exception is raised.
         cause.printStackTrace();
         ctx.close();
-    }
-
-    @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("channelRegistered");
-    }
-
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-         System.out.println("channelActive");
-    }
-
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("handlerAdded");
     }
 }

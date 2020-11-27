@@ -13,14 +13,13 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.codec;
+package io.netty.example.codec.stringcodes;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.example.splicing.lengthField.StringDecoder;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -50,7 +49,8 @@ public final class EchoServer {
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
 
-                     p.addLast(new LongDecoder());
+                     p.addLast(new LengthFieldBasedFrameDecoder(65535,0,2,0,0));
+                     p.addLast(new StringDecoder2());
                      p.addLast(new EchoServerHandler());
                  }
              });
