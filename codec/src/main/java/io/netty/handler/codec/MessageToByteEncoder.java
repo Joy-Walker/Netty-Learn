@@ -42,6 +42,9 @@ import io.netty.util.internal.TypeParameterMatcher;
  *         }
  *     }
  * </pre>
+ *
+ *
+ *  编码器的执行逻辑
  */
 public abstract class MessageToByteEncoder<I> extends ChannelOutboundHandlerAdapter {
 
@@ -95,28 +98,44 @@ public abstract class MessageToByteEncoder<I> extends ChannelOutboundHandlerAdap
         return matcher.match(msg);
     }
 
+    /**
+     * 调用write方法
+     * @param ctx
+     * @param msg 数据
+     * @param promise
+     * 三个对象都是从上一个handler传过来
+     * @throws Exception
+     */
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         ByteBuf buf = null;
         try {
+            // 类型判断
             if (acceptOutboundMessage(msg)) {
                 @SuppressWarnings("unchecked")
                 I cast = (I) msg;
+                // 分配内存
                 buf = allocateBuffer(ctx, cast, preferDirect);
                 try {
+                    // 调用encode （具体的子类实现）
                     encode(ctx, cast, buf);
                 } finally {
+                    // 释放
                     ReferenceCountUtil.release(cast);
                 }
 
+                // buff中已经有数据可读了
                 if (buf.isReadable()) {
+                    // 写出去
                     ctx.write(buf, promise);
                 } else {
                     buf.release();
+                    // 写一个空的buff
                     ctx.write(Unpooled.EMPTY_BUFFER, promise);
                 }
                 buf = null;
             } else {
+                // 不做处理，直接传播
                 ctx.write(msg, promise);
             }
         } catch (EncoderException e) {

@@ -1034,6 +1034,11 @@ public class DefaultChannelPipeline implements ChannelPipeline {
         return tail.bind(localAddress, promise);
     }
 
+    /**
+     * @param remoteAddress
+     * @param promise
+     * @return
+     */
     @Override
     public final ChannelFuture connect(SocketAddress remoteAddress, ChannelPromise promise) {
         return tail.connect(remoteAddress, promise);
@@ -1081,6 +1086,11 @@ public class DefaultChannelPipeline implements ChannelPipeline {
         return tail.writeAndFlush(msg, promise);
     }
 
+    /**
+     * 执行尾节点的writeAndFlush
+     * @param msg
+     * @return
+     */
     @Override
     public final ChannelFuture writeAndFlush(Object msg) {
         return tail.writeAndFlush(msg);

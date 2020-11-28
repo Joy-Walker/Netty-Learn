@@ -99,6 +99,8 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
      *
      * @param parent
      *        the parent of this channel. {@code null} if there's no parent.
+     *
+     *        创建id, unsafe,pipeline 与一个channel项绑定
      */
     protected AbstractChannel(Channel parent, ChannelId id) {
         this.parent = parent;
@@ -307,6 +309,11 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
         return pipeline.write(msg, promise);
     }
 
+    /**
+     * writeAndFlush的执行
+     * @param msg
+     * @return
+     */
     @Override
     public ChannelFuture writeAndFlush(Object msg) {
         return pipeline.writeAndFlush(msg);

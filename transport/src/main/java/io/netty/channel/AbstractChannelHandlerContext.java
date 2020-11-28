@@ -793,14 +793,23 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap
             return promise;
         }
 
+        /**
+         * flush 为true
+         */
         write(msg, true, promise);
 
         return promise;
     }
 
+    /**
+     * 依次调用每个channelHandler的write和flush方法
+     * 先调用invokeWrite，再调用invokeFlush
+     * @param msg
+     * @param promise
+     */
     private void invokeWriteAndFlush(Object msg, ChannelPromise promise) {
         if (invokeHandler()) {
-            invokeWrite0(msg, promise);
+            invokeWrite0(msg, promise);  // 依次调用write方法
             invokeFlush0();
         } else {
             writeAndFlush(msg, promise);
@@ -808,16 +817,18 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap
     }
 
     private void write(Object msg, boolean flush, ChannelPromise promise) {
+        // 找到一个出站的channelHandlerContext对象
         AbstractChannelHandlerContext next = findContextOutbound();
         final Object m = pipeline.touch(msg, next);
         EventExecutor executor = next.executor();
+        // 判断是否在当前线程内
         if (executor.inEventLoop()) {
             if (flush) {
                 next.invokeWriteAndFlush(m, promise);
             } else {
                 next.invokeWrite(m, promise);
             }
-        } else {
+        } else {  // 封装成一个task
             AbstractWriteTask task;
             if (flush) {
                 task = WriteAndFlushTask.newInstance(next, m, promise);
@@ -830,6 +841,9 @@ abstract class AbstractChannelHandlerContext extends DefaultAttributeMap
 
     @Override
     public ChannelFuture writeAndFlush(Object msg) {
+        /**
+         * promise对象中，含有channel和executor这两个对象
+         */
         return writeAndFlush(msg, newPromise());
     }
 

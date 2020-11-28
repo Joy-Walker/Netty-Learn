@@ -31,7 +31,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) {
        for(int i = 0; i < 1000; i++){
            count++;
-           ctx.writeAndFlush(new User());
+           ctx.channel().writeAndFlush(new User());
        }
         System.out.println("客户端发送" +count+"次数据.");
     }

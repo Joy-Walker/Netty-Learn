@@ -248,8 +248,14 @@ public abstract class AbstractNioByteChannel extends AbstractNioChannel {
         return WRITE_STATUS_SNDBUF_FULL;
     }
 
+    /**
+     * 一个channel默认一次只写16次，防止单个channel始终占用线程
+     * @param in
+     * @throws Exception
+     */
     @Override
     protected void doWrite(ChannelOutboundBuffer in) throws Exception {
+        // 默认16
         int writeSpinCount = config().getWriteSpinCount();
         do {
             Object msg = in.current();

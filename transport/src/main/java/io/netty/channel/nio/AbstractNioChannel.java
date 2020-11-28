@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Abstract base class for {@link Channel} implementations which use a Selector based approach.
+ * 封装和nio 网络操作相关
  */
 public abstract class AbstractNioChannel extends AbstractChannel {
 
@@ -389,7 +390,7 @@ public abstract class AbstractNioChannel extends AbstractChannel {
             try {
                 // chennel.register(selector,OP,attr);
                 // 注册，不关心任何事件，将channel作为附件放到里面
-                // 真正的注册
+                // 真正的注册,此时不关心任何事件
                 selectionKey = javaChannel().register(eventLoop().unwrappedSelector(), 0, this);
                 return;
             } catch (CancelledKeyException e) {

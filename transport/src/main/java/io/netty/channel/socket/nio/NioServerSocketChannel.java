@@ -56,6 +56,7 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel implements
              *
              *  See <a href="https://github.com/netty/netty/issues/2308">#2308</a>.
              */
+            // 调用jdk底层的方法
             return provider.openServerSocketChannel();
         } catch (IOException e) {
             throw new ChannelException(
@@ -141,6 +142,12 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel implements
         javaChannel().close();
     }
 
+    /**
+     * 处理客户端的连接
+     * @param buf
+     * @return
+     * @throws Exception
+     */
     @Override
     protected int doReadMessages(List<Object> buf) throws Exception {
 
