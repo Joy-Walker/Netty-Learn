@@ -154,8 +154,8 @@ public final class NioEventLoop extends SingleThreadEventLoop {
      * @param strategy
      * @param rejectedExecutionHandler
      */
-    NioEventLoop(NioEventLoopGroup parent, Executor executor, SelectorProvider selectorProvider,
-                 SelectStrategy strategy, RejectedExecutionHandler rejectedExecutionHandler) {
+    public NioEventLoop(NioEventLoopGroup parent, Executor executor, SelectorProvider selectorProvider,
+                        SelectStrategy strategy, RejectedExecutionHandler rejectedExecutionHandler) {
         super(parent, executor, false, DEFAULT_MAX_PENDING_TASKS, rejectedExecutionHandler);
         if (selectorProvider == null) {
             throw new NullPointerException("selectorProvider");

@@ -3,6 +3,7 @@ package io.netty.example.codec.fastjson;
 import com.alibaba.fastjson.JSON;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.example.myprotocol.vo.Message;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.ReferenceCountUtil;
 
@@ -25,6 +26,7 @@ public class FastJsonDecoder extends ByteToMessageDecoder {
         int length = msg.readableBytes();
         byte[] arr = new byte[length];
         msg.readBytes(arr,0,length);
-        out.add(JSON.parseObject(arr,clazz));
+        Object ob = JSON.parseObject(arr, clazz);
+        out.add(ob);
     }
 }
