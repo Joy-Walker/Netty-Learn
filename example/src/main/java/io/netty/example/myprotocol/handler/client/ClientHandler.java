@@ -1,4 +1,4 @@
-package io.netty.example.myprotocol.handler;
+package io.netty.example.myprotocol.handler.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -29,19 +29,23 @@ public class ClientHandler  extends ChannelInboundHandlerAdapter {
 
         switch (message.getMessageHeader().getMessageType()){
             case LOGIN:
-                LOGGER.info("[{}] 处理登录报文[{}]",name,message.getContent());
+                LOGGER.info("[{}] 收到消息[{}]",name,message.getContent());
                 MessageBuilder.buildMessage(MessageType.LOGIN,"响应登录请求报文");
                 ReferenceCountUtil.release(msg);
                 break;
             case SERVICE_:
-                LOGGER.info("[{}] 处理业务报文[{}]", name, message.getContent());
+                LOGGER.info("[{}] 收到消息[{}]", name, message.getContent());
                 MessageBuilder.buildMessage(MessageType.LOGIN, "响应业务报文");
                 ReferenceCountUtil.release(msg);
                 break;
             case HEARTBEAT:
-                LOGGER.info("[{}] 处理心跳报文[{}]",name,message.getContent());
-                MessageBuilder.buildMessage(MessageType.HEARTBEAT,"心跳报文");
+                LOGGER.info("[{}] 收到消息[{}]",name,message.getContent());
+                Message message1 = MessageBuilder.buildMessage(MessageType.HEARTBEAT, "心跳报文");
+                ctx.writeAndFlush(message1);
                 ReferenceCountUtil.release(msg);
+
+
+
                 break;
             default:
                 ctx.fireChannelRead(msg);
@@ -50,7 +54,7 @@ public class ClientHandler  extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.info("channel success 发送消息...");
+        LOGGER.info("channel success 发送登录请求消息...");
         ctx.writeAndFlush(MessageBuilder.buildMessage(MessageType.LOGIN,"登录请求"));
     }
 

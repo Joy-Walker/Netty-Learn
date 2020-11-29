@@ -1,12 +1,13 @@
-package io.netty.example.myprotocol.handler;
+package io.netty.example.myprotocol.handler.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.example.myprotocol.codec.FastJSONDecoder;
 import io.netty.example.myprotocol.codec.FastJSONEncoder;
-import io.netty.example.myprotocol.util.MessageBuilder;
-import io.netty.example.myprotocol.vo.MessageType;
+import io.netty.example.myprotocol.handler.ExceptionHandler;
+import io.netty.example.myprotocol.handler.MessageDecoder;
+import io.netty.example.myprotocol.handler.MessageEncoder;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import org.slf4j.Logger;

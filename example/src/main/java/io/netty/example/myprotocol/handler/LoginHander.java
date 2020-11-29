@@ -1,7 +1,5 @@
 package io.netty.example.myprotocol.handler;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.example.myprotocol.util.MessageBuilder;
@@ -31,12 +29,11 @@ public class LoginHander extends ChannelInboundHandlerAdapter {
 
             Message message = (Message) msg;
             if(message.getMessageHeader().getMessageType() == MessageType.LOGIN){
-                LOGGER.info("[{}] 处理登录报文[{}]",name,message.getContent());
-                Message message1 = MessageBuilder.buildMessage(MessageType.LOGIN, "响应登录请求报文");
-                LOGGER.info("响应登录报文...");
-               // ctx.channel().writeAndFlush(message1);
+                LOGGER.info("[{}] 收到消息[{}]",name,message.getContent());
+                Message message1 = MessageBuilder.buildMessage(MessageType.LOGIN, "登录成功...");
+                ctx.channel().writeAndFlush(message1);
+                ctx.executor().scheduleAtFixedRate(new HBTask(ctx),0,5000,TimeUnit.MILLISECONDS);
                 ReferenceCountUtil.release(msg);
-                ctx.executor().schedule(new HBTask(ctx),1000, TimeUnit.MILLISECONDS);
             }else{
                 ctx.fireChannelRead(msg);
             }
@@ -50,7 +47,6 @@ public class LoginHander extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-            LOGGER.info("定时发送心跳报文");
             ctx.writeAndFlush(MessageBuilder.buildMessage(MessageType.HEARTBEAT,"心跳报文"));
         }
     }

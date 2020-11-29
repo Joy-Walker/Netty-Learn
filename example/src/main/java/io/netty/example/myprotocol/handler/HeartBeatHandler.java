@@ -27,7 +27,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         Message message = (Message) msg;
         if(message.getMessageHeader().getMessageType() == MessageType.HEARTBEAT){
-           logger.info("[{}] 处理心跳报文[{}]",name,message.getContent());
+           logger.info("[{}] 收到消息[{}]",name,message.getContent());
             MessageBuilder.buildMessage(MessageType.HEARTBEAT,"心跳报文");
             ReferenceCountUtil.release(msg);
         }else{
