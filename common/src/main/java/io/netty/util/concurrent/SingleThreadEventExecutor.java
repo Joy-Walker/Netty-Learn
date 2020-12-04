@@ -775,7 +775,7 @@ public abstract class SingleThreadEventExecutor extends AbstractScheduledEventEx
             throw new NullPointerException("task");
         }
         boolean inEventLoop = inEventLoop();
-        // 添加到任务队列中
+        // 添加到任务队列中，并没有执行，所以taskQueue中的第一个任务是注册任务
         addTask(task);
 
         if (!inEventLoop) {

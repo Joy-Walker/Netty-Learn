@@ -444,9 +444,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         continue;
                         // 队列里面没有任务，阻塞select
                     case SelectStrategy.SELECT:
-
                         // 轮询IO事件，设置为未唤醒状态，执行selector操作
-
                         // select(false)
                         select(wakenUp.getAndSet(false));
 
@@ -458,7 +456,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         // The race condition is triggered when 'wakenUp' is set to
                         // true too early.
                         //
-                        // 'wakenUp' is set to true too early if:
+                        // 'wakenUp' is set to true too early if
                         // 1) Selector is waken up between 'wakenUp.set(false)' and
                         //    'selector.select(...)'. (BAD)
                         // 2) Selector is waken up between 'selector.select(...)' and
@@ -483,7 +481,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         }
                         // fall through
                     default:
-                        System.out.println("xxxx");
+//                        System.out.println("xxxx");
                 }
 
                 cancelledKeys = 0;
@@ -494,12 +492,10 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                 // ioRatio 默认为50 走else分支
                 if (ioRatio == 100) {
                     try {
-
                         // 处理IO事件
                         processSelectedKeys();
 
                     } finally {
-
                         // Ensure we always run tasks.
 
                         // 执行任务队列中的任务 [包括普通任务和周期性的任务]

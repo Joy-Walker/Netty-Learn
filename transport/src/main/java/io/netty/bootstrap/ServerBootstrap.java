@@ -277,7 +277,7 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             // 拿到SocketCannel
             final Channel child = (Channel) msg;
-            // 注册特殊的channelHandler
+            // 注册特殊的channelHandler,客户端的channelinitizaer
             child.pipeline().addLast(childHandler);
             // 设置配置属性,SocketChannel的属性，和TCP参数相关
             setChannelOptions(child, childOptions, logger);

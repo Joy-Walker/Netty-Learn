@@ -38,6 +38,7 @@ public abstract class AbstractScheduledEventExecutor extends AbstractEventExecut
                 }
             };
 
+    // 定时任务队列，使用一个优先级队列来实现
     PriorityQueue<ScheduledFutureTask<?>> scheduledTaskQueue;
 
     protected AbstractScheduledEventExecutor() {
@@ -106,7 +107,7 @@ public abstract class AbstractScheduledEventExecutor extends AbstractEventExecut
         if (scheduledTask == null) {
             return null;
         }
-
+        // 第一个任务的截止时间 < nanoTime
         if (scheduledTask.deadlineNanos() <= nanoTime) {
             scheduledTaskQueue.remove();
             return scheduledTask;
@@ -135,6 +136,8 @@ public abstract class AbstractScheduledEventExecutor extends AbstractEventExecut
     }
 
     /**
+     * 是否有可以执行的任务
+     * 判断队列中的一个任务的截止时间 <
      * Returns {@code true} if a scheduled task is ready for processing.
      */
     protected final boolean hasScheduledTasks() {
@@ -143,6 +146,13 @@ public abstract class AbstractScheduledEventExecutor extends AbstractEventExecut
         return scheduledTask != null && scheduledTask.deadlineNanos() <= nanoTime();
     }
 
+    /**
+     * 添加任务到队列
+     * @param command
+     * @param delay
+     * @param unit
+     * @return
+     */
     @Override
     public ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) {
         ObjectUtil.checkNotNull(command, "command");

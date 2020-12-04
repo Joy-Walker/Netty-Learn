@@ -27,9 +27,17 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @SuppressWarnings("ComparableImplementedButEqualsNotOverridden")
 final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFuture<V>, PriorityQueueNode {
+
     private static final AtomicLong nextTaskId = new AtomicLong();
+    /**
+     * 类加载的时间
+     */
     private static final long START_TIME = System.nanoTime();
 
+    /**
+     *  当前时间 - 类加载的时间
+     * @return
+     */
     static long nanoTime() {
         return System.nanoTime() - START_TIME;
     }
@@ -39,22 +47,27 @@ final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFu
     }
 
     private final long id = nextTaskId.getAndIncrement();
+    /**
+     * 任务的执行时间
+     */
     private long deadlineNanos;
-    /* 0 - no repeat, >0 - repeat at fixed rate, <0 - repeat with fixed delay */
+
+    /**
+     *  0 - no repeat,
+     *  >0 - repeat at fixed rate,
+     *  <0 - repeat with fixed delay
+     *
+     */
     private final long periodNanos;
 
     private int queueIndex = INDEX_NOT_IN_QUEUE;
 
-    ScheduledFutureTask(
-            AbstractScheduledEventExecutor executor,
-            Runnable runnable, V result, long nanoTime) {
+    ScheduledFutureTask(AbstractScheduledEventExecutor executor, Runnable runnable, V result, long nanoTime) {
 
         this(executor, toCallable(runnable, result), nanoTime);
     }
 
-    ScheduledFutureTask(
-            AbstractScheduledEventExecutor executor,
-            Callable<V> callable, long nanoTime, long period) {
+    ScheduledFutureTask(AbstractScheduledEventExecutor executor, Callable<V> callable, long nanoTime, long period) {
 
         super(executor, callable);
         if (period == 0) {
@@ -64,9 +77,7 @@ final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFu
         periodNanos = period;
     }
 
-    ScheduledFutureTask(
-            AbstractScheduledEventExecutor executor,
-            Callable<V> callable, long nanoTime) {
+    ScheduledFutureTask(AbstractScheduledEventExecutor executor, Callable<V> callable, long nanoTime) {
 
         super(executor, callable);
         deadlineNanos = nanoTime;
@@ -90,6 +101,11 @@ final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFu
         return Math.max(0, deadlineNanos() - (currentTimeNanos - START_TIME));
     }
 
+    /**
+     * 任务还有多久要被执行
+     * @param unit
+     * @return
+     */
     @Override
     public long getDelay(TimeUnit unit) {
         return unit.convert(delayNanos(), TimeUnit.NANOSECONDS);
@@ -121,11 +137,15 @@ final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFu
         assert executor().inEventLoop();
         try {
             if (periodNanos == 0) {
+                // 只执行一次
                 if (setUncancellableInternal()) {
+                    // 调用call方法
                     V result = task.call();
+                    // 设置执行成功的回调
                     setSuccessInternal(result);
                 }
             } else {
+                // 一直执行
                 // check if is done as it may was cancelled
                 if (!isCancelled()) {
                     task.call();
@@ -141,6 +161,7 @@ final class ScheduledFutureTask<V> extends PromiseTask<V> implements ScheduledFu
                             Queue<ScheduledFutureTask<?>> scheduledTaskQueue =
                                     ((AbstractScheduledEventExecutor) executor()).scheduledTaskQueue;
                             assert scheduledTaskQueue != null;
+                            // 执行完一次又放进类队列
                             scheduledTaskQueue.add(this);
                         }
                     }
