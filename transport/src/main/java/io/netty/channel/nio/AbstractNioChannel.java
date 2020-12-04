@@ -413,7 +413,6 @@ public abstract class AbstractNioChannel extends AbstractChannel {
         eventLoop().cancel(selectionKey());
     }
 
-    // 设置读感兴趣事件
     @Override
     protected void doBeginRead() throws Exception {
         // Channel.read() or ChannelHandlerContext.read() was called
@@ -427,7 +426,6 @@ public abstract class AbstractNioChannel extends AbstractChannel {
         final int interestOps = selectionKey.interestOps();
         // == 0 说明当前并没有设置读操作位
         if ((interestOps & readInterestOp) == 0) {
-            // 设置读感兴趣事件
             selectionKey.interestOps(interestOps | readInterestOp);
         }
     }

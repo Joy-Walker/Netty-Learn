@@ -1030,7 +1030,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
 
     @Override
     public final ChannelFuture bind(SocketAddress localAddress, ChannelPromise promise) {
-        // 传播到尾节点的bind
+        // 调用尾节点的bind
         return tail.bind(localAddress, promise);
     }
 

@@ -13,17 +13,19 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.codec.stringcodes;
+package io.netty.example.test;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -32,11 +34,10 @@ import io.netty.util.concurrent.GenericFutureListener;
  */
 public final class EchoServer {
 
-    static final boolean SSL = System.getProperty("ssl") != null;
-    static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
+
 
     public static void main(String[] args) throws Exception {
-
+        // Configure SSL.
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -44,28 +45,17 @@ public final class EchoServer {
             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
              .option(ChannelOption.SO_BACKLOG, 100)
-             .handler(new ChannelInitializer<ServerSocketChannel>() {
-                 @Override
-                 protected void initChannel(ServerSocketChannel ch) throws Exception {
-                     ChannelPipeline p = ch.pipeline();
-
-                     p.addLast(new LengthFieldBasedFrameDecoder(65535,0,2,0,0));
-                     p.addLast(new StringDecoder2());
-                     p.addLast(new EchoServerHandler());
-                 }
-             })
              .childHandler(new ChannelInitializer<SocketChannel>() {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
-
-                     p.addLast(new LengthFieldBasedFrameDecoder(65535,0,2,0,0));
-                     p.addLast(new StringDecoder2());
+                     p.addLast(new HttpServerCodec());
                      p.addLast(new EchoServerHandler());
+                     p.addLast(new EchoServerHandler());
+                     p.addLast(new OutBoundHandler());
                  }
              });
-
-            ChannelFuture f = b.bind(PORT).addListener(new GenericFutureListener<Future<? super Void>>() {
+            ChannelFuture f = b.bind(8007).addListener(new GenericFutureListener<Future<? super Void>>() {
                 @Override
                 public void operationComplete(Future<? super Void> future) throws Exception {
                     if (future.isSuccess()) {
@@ -78,8 +68,7 @@ public final class EchoServer {
 
 
             // Wait until the server socket is closed.
-             f.channel().closeFuture().sync();
-
+            f.channel().closeFuture().sync();
         } finally {
             // Shut down all event loops to terminate all threads.
             bossGroup.shutdownGracefully();

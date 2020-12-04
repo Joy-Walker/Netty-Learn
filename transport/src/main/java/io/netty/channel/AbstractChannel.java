@@ -491,9 +491,6 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
             }
             // 与该channel关联的线程保存起来
             AbstractChannel.this.eventLoop = eventLoop;
-            // 当前线程是不是通过线程选择器选择出来的线程
-            // 服务端channel由main线程提交
-            // 客户端channel的连接事件由服务端的eventloop提交
             if (eventLoop.inEventLoop()) {
                 register0(promise);
             } else {
@@ -547,6 +544,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
 
                 // Only fire a channelActive if the channel has never been registered. This prevents firing
                 // multiple channel actives if the channel is deregistered and re-registered.
+                // 判断是否bind，因为此时在执行register操作，因此不会进这个if
                 if (isActive()) {
                     if (firstRegistration) {
                         pipeline.fireChannelActive();
@@ -601,6 +599,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
                 invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        // active是bind之后回调的
                         pipeline.fireChannelActive();
                     }
                 });

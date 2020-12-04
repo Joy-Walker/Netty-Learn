@@ -81,6 +81,9 @@ public abstract class SingleThreadEventExecutor extends AbstractScheduledEventEx
 
     private final Queue<Runnable> taskQueue;
 
+    /**
+     * 关联的线程对象
+     */
     private volatile Thread thread;
     @SuppressWarnings("unused")
     private volatile ThreadProperties threadProperties;
@@ -163,7 +166,7 @@ public abstract class SingleThreadEventExecutor extends AbstractScheduledEventEx
         this.maxPendingTasks = Math.max(16, maxPendingTasks);
         // 线程创建执行器 ，后面用于创建NioEventloop
         this.executor = ObjectUtil.checkNotNull(executor, "executor");
-        // 普通任务队列
+              // 创建MPSC队列
         taskQueue = newTaskQueue(this.maxPendingTasks);
         rejectedExecutionHandler = ObjectUtil.checkNotNull(rejectedHandler, "rejectedHandler");
     }
@@ -768,11 +771,9 @@ public abstract class SingleThreadEventExecutor extends AbstractScheduledEventEx
     // 被覆盖了，只是将任务存入到了队列中
     @Override
     public void execute(Runnable task) {
-
         if (task == null) {
             throw new NullPointerException("task");
         }
-
         boolean inEventLoop = inEventLoop();
         // 添加到任务队列中
         addTask(task);
@@ -889,7 +890,6 @@ public abstract class SingleThreadEventExecutor extends AbstractScheduledEventEx
         executor.execute(new Runnable() {
             @Override
             public void run() {
-
                 //创建的新线程，保存起来
                 thread = Thread.currentThread();
                 if (interrupted) {

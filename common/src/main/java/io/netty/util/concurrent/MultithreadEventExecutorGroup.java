@@ -67,20 +67,16 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
      * @param chooserFactory    the {@link EventExecutorChooserFactory} to use.
      * @param args              arguments which will passed to each {@link #newChild(Executor, Object...)} call
      */
-    protected MultithreadEventExecutorGroup(int nThreads, Executor executor,
-                                            EventExecutorChooserFactory chooserFactory, Object... args) {
+    protected MultithreadEventExecutorGroup(int nThreads, Executor executor, EventExecutorChooserFactory chooserFactory, Object... args) {
         if (nThreads <= 0) {
             throw new IllegalArgumentException(String.format("nThreads: %d (expected: > 0)", nThreads));
         }
-
         if (executor == null) {
             // 线程创建器,执行器【内部含有一个线程工厂 -- FastThreadLocalThread】
             executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
         }
-
         // 数组
         children = new EventExecutor[nThreads];
-
         // 逐个实例化
         for (int i = 0; i < nThreads; i ++) {
             boolean success = false;
@@ -96,7 +92,6 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
                     for (int j = 0; j < i; j ++) {
                         children[j].shutdownGracefully();
                     }
-
                     for (int j = 0; j < i; j ++) {
                         EventExecutor e = children[j];
                         try {
@@ -112,7 +107,6 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
                 }
             }
         }
-
         // 线程选择器，所有EventLoop共享在循环外创建的，策略
         chooser = chooserFactory.newChooser(children);
 

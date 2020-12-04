@@ -118,7 +118,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
     static final long MAX_SCHEDULED_DAYS = 365 * 3;
 
     /**
-     * The NIO {@link Selector}.   每个线程又一个selector
+     * The NIO {@link Selector}.   每个线程有一个selector
      * Selector
      */
     private Selector selector;
@@ -440,8 +440,6 @@ public final class NioEventLoop extends SingleThreadEventLoop {
         for (;;) {
             try {
                 switch (selectStrategy.calculateStrategy(selectNowSupplier, hasTasks())) {
-
-
                     case SelectStrategy.CONTINUE:
                         continue;
                         // 队列里面没有任务，阻塞select
@@ -485,6 +483,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
                         }
                         // fall through
                     default:
+                        System.out.println("xxxx");
                 }
 
                 cancelledKeys = 0;
@@ -519,6 +518,7 @@ public final class NioEventLoop extends SingleThreadEventLoop {
 
                     } finally {
                         // Ensure we always run tasks.
+                        // 此时的ioTime为执行io事件所耗费的时间
                         final long ioTime = System.nanoTime() - ioStartTime;
                         //   ioTime * (100 - ioRatio) / ioRatio  == 50
                         runAllTasks(ioTime * (100 - ioRatio) / ioRatio);

@@ -29,6 +29,15 @@ public final class DefaultEventExecutorChooserFactory implements EventExecutorCh
 
     private DefaultEventExecutorChooserFactory() { }
 
+
+    /**
+     *
+     *
+     *  Math.abs( n % length) == n & (length - 1)
+     * @param executors
+     * @return
+     */
+
     @SuppressWarnings("unchecked")
     @Override
     public EventExecutorChooser newChooser(EventExecutor[] executors) {

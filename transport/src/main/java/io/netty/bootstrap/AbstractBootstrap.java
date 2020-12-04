@@ -57,7 +57,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     private final Map<ChannelOption<?>, Object> options = new LinkedHashMap<ChannelOption<?>, Object>();
     private final Map<AttributeKey<?>, Object> attrs = new LinkedHashMap<AttributeKey<?>, Object>();
 
-    //
+    // handler对象不是childHandler
     private volatile ChannelHandler handler;
 
     AbstractBootstrap() {
@@ -287,23 +287,24 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
 
     private ChannelFuture doBind(final SocketAddress localAddress) {
 
-        // 初始化和注册
+        // 初始化和注册,返回一个future对象 【】
         final ChannelFuture regFuture = initAndRegister();
 
         final Channel channel = regFuture.channel();
         if (regFuture.cause() != null) {
             return regFuture;
         }
-
+        // 注册已经完成
         if (regFuture.isDone()) {
             // At this point we know that the registration was complete and successful.
             ChannelPromise promise = channel.newPromise();
-
+            // 调用dobind0
             doBind0(regFuture, channel, localAddress, promise);
             return promise;
         } else {
             // Registration future is almost always fulfilled already, but just in case it's not.
             final PendingRegistrationPromise promise = new PendingRegistrationPromise(channel);
+            // 在监听器里面调用dobind0
             regFuture.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
@@ -343,13 +344,9 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
             // as the Channel is not registered yet we need to force the usage of the GlobalEventExecutor
             return new DefaultChannelPromise(new FailedChannel(), GlobalEventExecutor.INSTANCE).setFailure(t);
         }
-
-
         // 注册ServerSocketChannel
-        // config().group() 返回EventLoopGroup实例
+        // config().group() 返回EventLoopGroup实例  boss线程启动
         ChannelFuture regFuture = config().group().register(channel);
-
-
         if (regFuture.cause() != null) {
             if (channel.isRegistered()) {
                 channel.close();

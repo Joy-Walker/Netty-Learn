@@ -70,7 +70,6 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel implements
      * Create a new instance
      */
     public NioServerSocketChannel() {
-
         //  this(ServerSocketChannel);
         this(newSocket(DEFAULT_SELECTOR_PROVIDER));
     }
@@ -86,8 +85,7 @@ public class NioServerSocketChannel extends AbstractNioMessageChannel implements
      * Create a new instance using the given {@link ServerSocketChannel}.
      */
     public NioServerSocketChannel(ServerSocketChannel channel) {
-
-        // 关心连接事件
+        // 关心连接事件（但其实不是这个时候注册连接事件）
         super(null, channel, SelectionKey.OP_ACCEPT);
         config = new NioServerSocketChannelConfig(this, javaChannel().socket());
     }

@@ -52,6 +52,9 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
 
     private volatile EventLoopGroup childGroup;
 
+    // chileHandler 为什么将这个对象放在ServerBootstrap中，因为只有Server端才有childHandler，还有handler，
+    // 而client只有handler因此就将handler放到了父类中
+    // 是一个channelInithandler
     private volatile ChannelHandler childHandler;
 
     public ServerBootstrap() { }
@@ -172,24 +175,29 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
         synchronized (childAttrs) {
             currentChildAttrs = childAttrs.entrySet().toArray(newAttrArray(childAttrs.size()));
         }
-
+        // 此时这个pipeline是nioServerSocketChannel对应的pipeline
+        // 在pipeline中新加入了一个节点ChannelInitializer
+        /**
+         * ---------------------------------------------------------
+         *           ｜                 ｜               ｜
+         *    head   ｜     initial     ｜      tail     ｜
+         *           ｜                 ｜               ｜
+         * ---------------------------------------------------------
+         */
         p.addLast(new ChannelInitializer<Channel>() {
             @Override
             public void initChannel(final Channel ch) throws Exception {
                 final ChannelPipeline pipeline = ch.pipeline();
-
-                // 自定义的handler
+                // 这里是handler对象而不是childHandler
                 ChannelHandler handler = config.handler();
-
                 if (handler != null) {
-                    // 掺入到tail节点的前面
+                    // 插入到tail节点的前面
                     pipeline.addLast(handler);
                 }
-
                 ch.eventLoop().execute(new Runnable() {
                     @Override
                     public void run() {
-                        // 加入一个特殊的Handler
+                        // 加入一个特殊的Handler 处理客户端的连接
                         pipeline.addLast(new ServerBootstrapAcceptor(
                                 ch, currentChildGroup, currentChildHandler, currentChildOptions, currentChildAttrs));
                     }
@@ -197,6 +205,14 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
             }
         });
     }
+
+    /**
+     * ---------------------------------------------------------
+     *           ｜                 ｜               ｜
+     *    head   ｜     initial     ｜      tail     ｜
+     *           ｜                 ｜               ｜
+     * ---------------------------------------------------------
+     */
 
     @Override
     public ServerBootstrap validate() {
